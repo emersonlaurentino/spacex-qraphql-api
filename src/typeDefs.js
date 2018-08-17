@@ -2,10 +2,20 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
   type Query {
-    launches: [Launche]
+    launches(input: LauncheInput): [Launche]
+  }
+
+  input LauncheInput {
+    orderBy: OrderBy
+  }
+
+  enum OrderBy {
+    ASC
+    DESC
   }
 
   type Launche {
+    _id: String
     details: String
     flight_number: Int
     launch_date_local: String
