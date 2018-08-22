@@ -2,6 +2,7 @@ const { capsules, capsule } = require('./capsules');
 const { info, roadster, history } = require('./info');
 const { launches, launch } = require('./launches');
 const { rockets, rocket } = require('./rockets');
+const { launchpads, launchpad } = require('./launchpads');
 
 const resolvers = {
   Query: {
@@ -11,6 +12,8 @@ const resolvers = {
     info,
     launch,
     launches,
+    launchpad,
+    launchpads,
     roadster,
     rocket,
     rockets,

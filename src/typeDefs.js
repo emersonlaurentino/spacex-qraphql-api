@@ -4,6 +4,8 @@ const typeDefs = gql`
   type Query {
     capsule(id: String!): Capsule
     capsules: [Capsule]
+    launchpad(id: String!): Launchpad
+    launchpads: [Launchpad]
     history: [History]
     info: Info
     launch(id: String!): Launch
@@ -23,6 +25,23 @@ const typeDefs = gql`
   enum OrderBy {
     ASC
     DESC
+  }
+
+  type Launchpad {
+    padid: Int
+    id: String
+    full_name: String
+    status: String
+    location: LaunchpadLocation
+    vehicles_launched: [String]
+    details: String
+  }
+
+  type LaunchpadLocation {
+    name: String
+    region: String
+    latitude: Float
+    longitude: Float
   }
 
   type History {
