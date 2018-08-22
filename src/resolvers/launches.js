@@ -5,12 +5,14 @@ module.exports = {
   launches: (_, { order, scope }) => {
     const url = (() => {
       const baseScope = `${getUrl(
-        `launches${scope ? `/${scope}` : null}`
+        `launches${scope ? `/${scope}` : ''}`
       )}?id=true`;
 
       if (order) {
         return `${baseScope}&order=${order.toLowerCase()}`;
       }
+
+      console.log(baseScope);
 
       return baseScope;
     })();
