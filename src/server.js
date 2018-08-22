@@ -8,5 +8,6 @@ const server = new ApolloServer({
 });
 
 server.listen().then(({ url }) => {
+  // eslint-disable-next-line
   console.log(`🚀 Server ready at ${url}`);
 });

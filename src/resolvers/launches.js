@@ -12,8 +12,6 @@ module.exports = {
         return `${baseScope}&order=${order.toLowerCase()}`;
       }
 
-      console.log(baseScope);
-
       return baseScope;
     })();
 
