@@ -2,11 +2,17 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
   type Query {
-    launches(input: LauncheInput): [Launche]
+    launches(order: OrderBy, scope: Scope): [Launch]
+    launch(id: String!): Launch
+    rockets(order: OrderBy): [Rocket]
+    rocket(id: String!): Rocket
   }
 
-  input LauncheInput {
-    orderBy: OrderBy
+  enum Scope {
+    all
+    latest
+    next
+    upcoming
   }
 
   enum OrderBy {
@@ -14,7 +20,62 @@ const typeDefs = gql`
     DESC
   }
 
-  type Launche {
+  type Rocket {
+    rocketid: Int
+    id: String
+    name: String
+    type: String
+    active: Boolean
+    stages: Int
+    boosters: Int
+    cost_per_launch: Int
+    success_rate_pct: Int
+    first_flight: String
+    country: String
+    company: String
+    height: Height
+    diameter: Diameter
+    mass: RocketMass
+    payload_weights: RocketPayloadWeights
+    first_stage: RocketFirstStage
+    second_stage: RocketSecondStage
+    engines: RocketEngines
+    landing_legs: RocketLandingLegs
+    wikipedia: String
+    description: String
+  }
+
+  type RocketLandingLegs {
+    number: Int
+    material: String
+  }
+
+  type RocketEngines {
+    number: Int
+    type: String
+    version: String
+    layout: String
+    engine_loss_max: Int
+    propellant_1: String
+    propellant_2: String
+    thrust_sea_level: Thrust
+    thrust_vacuum: Thrust
+    thrust_to_weight: Int
+  }
+
+  type RocketMass {
+    kg: Float
+    lb: Float
+  }
+
+  type RocketPayloadWeights {
+    id: String
+    name: String
+    kg: Float
+    lb: Float
+  }
+
+  type Launch {
     _id: String
     details: String
     flight_number: Int
@@ -24,28 +85,28 @@ const typeDefs = gql`
     launch_site: LaunchSite
     launch_success: Boolean
     launch_year: Int
-    links: Links
+    links: LaunchLinks
     mission_name: String
-    reuse: Reuse
-    rocket: Rocket
+    reuse: LaunchReuse
+    rocket: LaunchRocket
     static_fire_date_utc: String
-    telemetry: Telemetry
+    telemetry: LaunchTelemetry
     upcoming: Boolean
   }
 
-  type Rocket {
-    first_stage: FirstStage
+  type LaunchRocket {
+    first_stage: LaunchRocketFirstStage
     rocket_id: String
     rocket_name: String
     rocket_type: String
-    second_stage: SecondStage
+    second_stage: LaunchRocketSecondStage
   }
 
-  type FirstStage {
-    cores: [Core]
+  type LaunchRocketFirstStage {
+    cores: [LaunchRocketFirstStageCore]
   }
 
-  type Core {
+  type LaunchRocketFirstStageCore {
     block: Int
     core_serial: String
     flight: Int
@@ -55,9 +116,52 @@ const typeDefs = gql`
     reused: Boolean
   }
 
-  type SecondStage {
+  type LaunchRocketSecondStage {
     block: Int
     payloads: [Payload]
+  }
+
+  type RocketFirstStage {
+    reusable: Boolean
+    engines: Int
+    fuel_amount_tons: Float
+    burn_time_sec: Int
+    thrust_sea_level: Thrust
+    thrust_vacuum: Thrust
+  }
+
+  type RocketSecondStage {
+    engines: Int
+    fuel_amount_tons: Float
+    burn_time_sec: Int
+    thrust: Thrust
+    payloads: RocketSecondStagePayload
+  }
+
+  type RocketSecondStagePayload {
+    option_1: String
+    option_2: String
+    composite_fairing: CompositeFairing
+  }
+
+  type CompositeFairing {
+    height: Height
+    diameter: Diameter
+  }
+
+  type Height {
+    meters: Float
+    feet: Float
+  }
+
+  type Diameter {
+    meters: Float
+    feet: Float
+  }
+
+  type Thrust {
+    kN: Float
+    lbf: Float
   }
 
   type Payload {
@@ -90,11 +194,11 @@ const typeDefs = gql`
     semi_major_axis_km: Float
   }
 
-  type Telemetry {
+  type LaunchTelemetry {
     flight_club: String
   }
 
-  type Reuse {
+  type LaunchReuse {
     capsule: Boolean
     core: Boolean
     fairings: Boolean
@@ -108,7 +212,7 @@ const typeDefs = gql`
     site_name: String
   }
 
-  type Links {
+  type LaunchLinks {
     article_link: String
     mission_patch_small: String
     mission_patch: String
