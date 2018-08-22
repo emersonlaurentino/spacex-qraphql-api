@@ -2,13 +2,13 @@ const axios = require('axios');
 const { getData, getUrl } = require('../utils');
 
 module.exports = {
-  rockets: () => {
-    const url = getUrl('rockets');
+  capsules: () => {
+    const url = getUrl('capsules');
 
     return axios.get(url).then(getData);
   },
-  rocket: (_, { id }) => {
-    const url = `${getUrl('rockets')}/${id}`;
+  capsule: (_, { id }) => {
+    const url = `${getUrl('capsules')}/${id}`;
 
     return axios.get(url).then(getData);
   },

@@ -1,5 +1,6 @@
 const { rockets, rocket } = require('./rockets');
 const { launches, launch } = require('./launches');
+const { capsules, capsule } = require('./capsules');
 
 const resolvers = {
   Query: {
@@ -7,6 +8,8 @@ const resolvers = {
     rocket,
     launches,
     launch,
+    capsules,
+    capsule,
   },
 };
 

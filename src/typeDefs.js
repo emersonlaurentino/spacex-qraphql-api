@@ -4,8 +4,10 @@ const typeDefs = gql`
   type Query {
     launches(order: OrderBy, scope: Scope): [Launch]
     launch(id: String!): Launch
-    rockets(order: OrderBy): [Rocket]
+    rockets: [Rocket]
     rocket(id: String!): Rocket
+    capsules: [Capsule]
+    capsule(id: String!): Capsule
   }
 
   enum Scope {
@@ -18,6 +20,63 @@ const typeDefs = gql`
   enum OrderBy {
     ASC
     DESC
+  }
+
+  type Capsule {
+    id: String
+    name: String
+    type: String
+    active: Boolean
+    crew_capacity: Int
+    sidewall_angle_deg: Int
+    orbit_duration_yr: Int
+    heat_shield: CapsuleHeatShield
+    thrusters: [CapsuleThrusters]
+    launch_payload_mass: Mass
+    launch_payload_vol: CapsulePayloadVol
+    return_payload_mass: Mass
+    return_payload_vol: CapsulePayloadVol
+    pressurized_capsule: CapsulePressurized
+    trunk: CapsuleTrunk
+    height_w_trunk: Height
+    diameter: Diameter
+    wikipedia: String
+    description: String
+  }
+
+  type CapsuleTrunk {
+    trunk_volume: CapsulePayloadVol
+    cargo: CapsuleCargo
+  }
+
+  type CapsuleCargo {
+    solar_array: Int
+    unpressurized_cargo: Boolean
+  }
+
+  type CapsulePressurized {
+    payload_volume: CapsulePayloadVol
+  }
+
+  type CapsulePayloadVol {
+    cubic_meters: Int
+    cubic_feet: Int
+  }
+
+  type CapsuleThrusters {
+    type: String
+    amount: Int
+    pods: Int
+    fuel_1: String
+    fuel_2: String
+    thrust: Thrust
+  }
+
+  type CapsuleHeatShield {
+    material: String
+    size_meters: Float
+    temp_degrees: Int
+    dev_partner: String
   }
 
   type Rocket {
@@ -35,7 +94,7 @@ const typeDefs = gql`
     company: String
     height: Height
     diameter: Diameter
-    mass: RocketMass
+    mass: Mass
     payload_weights: RocketPayloadWeights
     first_stage: RocketFirstStage
     second_stage: RocketSecondStage
@@ -63,7 +122,7 @@ const typeDefs = gql`
     thrust_to_weight: Int
   }
 
-  type RocketMass {
+  type Mass {
     kg: Float
     lb: Float
   }
