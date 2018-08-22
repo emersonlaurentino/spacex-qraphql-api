@@ -2,12 +2,15 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
   type Query {
-    launches(order: OrderBy, scope: Scope): [Launch]
-    launch(id: String!): Launch
-    rockets: [Rocket]
-    rocket(id: String!): Rocket
-    capsules: [Capsule]
     capsule(id: String!): Capsule
+    capsules: [Capsule]
+    history: [History]
+    info: Info
+    launch(id: String!): Launch
+    launches(order: OrderBy, scope: Scope): [Launch]
+    roadster: Roadster
+    rocket(id: String!): Rocket
+    rockets: [Rocket]
   }
 
   enum Scope {
@@ -20,6 +23,71 @@ const typeDefs = gql`
   enum OrderBy {
     ASC
     DESC
+  }
+
+  type History {
+    title: String
+    event_date_utc: String
+    event_date_unix: Int
+    flight_number: Float
+    details: String
+    links: HistoryLinks
+  }
+
+  type HistoryLinks {
+    reddit: String
+    article: String
+    wikipedia: String
+  }
+
+  type Roadster {
+    name: String
+    launch_date_utc: String
+    launch_date_unix: Int
+    launch_mass_kg: Float
+    launch_mass_lbs: Float
+    norad_id: Int
+    epoch_jd: Float
+    orbit_type: String
+    apoapsis_au: Float
+    periapsis_au: Float
+    semi_major_axis_au: Float
+    eccentricity: Float
+    inclination: Float
+    longitude: Float
+    periapsis_arg: Float
+    period_days: Float
+    speed_kph: Float
+    speed_mph: Float
+    earth_distance_km: Float
+    earth_distance_mi: Float
+    mars_distance_km: Float
+    mars_distance_mi: Float
+    wikipedia: String
+    details: String
+  }
+
+  type Info {
+    name: String
+    founder: String
+    founded: Int
+    employees: Int
+    vehicles: Int
+    launch_sites: Int
+    test_sites: Int
+    ceo: String
+    cto: String
+    coo: String
+    cto_propulsion: String
+    valuation: Float
+    headquarters: Headquarters
+    summary: String
+  }
+
+  type Headquarters {
+    address: String
+    city: String
+    state: String
   }
 
   type Capsule {

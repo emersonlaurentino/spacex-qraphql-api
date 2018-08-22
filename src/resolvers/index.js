@@ -1,15 +1,19 @@
-const { rockets, rocket } = require('./rockets');
-const { launches, launch } = require('./launches');
 const { capsules, capsule } = require('./capsules');
+const { info, roadster, history } = require('./info');
+const { launches, launch } = require('./launches');
+const { rockets, rocket } = require('./rockets');
 
 const resolvers = {
   Query: {
-    rockets,
-    rocket,
-    launches,
-    launch,
-    capsules,
     capsule,
+    capsules,
+    history,
+    info,
+    launch,
+    launches,
+    roadster,
+    rocket,
+    rockets,
   },
 };
 
