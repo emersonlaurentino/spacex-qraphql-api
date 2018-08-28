@@ -14,13 +14,13 @@
 |history|Get company history and milestones|   |
 |info|Get information on Space Exploration Technologies Corp|   |
 |launch|Get information for a specific launch|`id: String`|
-|launches|Get information for all past launches| `scope: latest | next | upcoming | all`, `sort: String`, `order: ASC | DESC` |
+|launches|Get information for all past launches| `scope: latest / next / upcoming / all`, `sort: String`, `order: ASC / DESC` |
 |launchpad|Get information for a specific launchpad|`id: String`|
 |launchpads|Get information for all launchpads|   |
 |partCapsule|Get information for specific capsule used during flights|`id: String`|
-|partCapsules|Get information for all capsules used during flights|   |
+|partCapsules|Get information for all capsules used during flights|`sort: String`, `order: ASC / DESC`|
 |partCore|Get information for specific core used during flights|`id: String`|
-|partCores|Get information for all cores used during flights|   |
+|partCores|Get information for all cores used during flights|`sort: String`, `order: ASC / DESC`|
 |roadster|Get information and orbital data for Starman Roader|   |
 |rocket|Get information for a specific rocket|`id: String`|
 |rockets|Get information for rockets|   |
