@@ -1,15 +1,15 @@
 const axios = require('axios');
-const { getData, getUrl } = require('../utils');
+const { getData, getUrl, addOrderSort } = require('../utils');
 
 module.exports = {
-  launches: (_, { order, scope }) => {
+  launches: (_, { scope, order, sort }) => {
     const url = (() => {
       const baseScope = `${getUrl(
         `launches${scope ? `/${scope}` : ''}`
       )}?id=true`;
 
-      if (order) {
-        return `${baseScope}&order=${order.toLowerCase()}`;
+      if (order || sort) {
+        return addOrderSort({ baseScope, order, sort });
       }
 
       return baseScope;
@@ -22,7 +22,7 @@ module.exports = {
     return axios.get(url).then(getData);
   },
   launch: (_, { id }) => {
-    const url = `${getUrl('launches')}&flight_id=${id}`;
+    const url = `${getUrl('launches')}?id=true&flight_id=${id}`;
 
     return axios.get(url).then(({ data }) => data[0]);
   },

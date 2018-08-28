@@ -4,18 +4,22 @@ const typeDefs = gql`
   type Query {
     capsule(id: String!): Capsule
     capsules: [Capsule]
-    launchpad(id: String!): Launchpad
-    launchpads: [Launchpad]
     history: [History]
     info: Info
     launch(id: String!): Launch
-    launches(order: OrderBy, scope: Scope): [Launch]
+    launches(scope: LaunchScope, order: OrderBy, sort: String): [Launch]
+    launchpad(id: String!): Launchpad
+    launchpads: [Launchpad]
+    partCapsule(id: String!): PartCapsule
+    partCapsules(order: OrderBy, sort: String): [PartCapsule]
+    partCore(id: String!): PartCore
+    partCores(order: OrderBy, sort: String): [PartCore]
     roadster: Roadster
     rocket(id: String!): Rocket
     rockets: [Rocket]
   }
 
-  enum Scope {
+  enum LaunchScope {
     all
     latest
     next
@@ -25,6 +29,33 @@ const typeDefs = gql`
   enum OrderBy {
     ASC
     DESC
+  }
+
+  type PartCore {
+    core_serial: String
+    block: Int
+    status: String
+    original_launch: String
+    original_launch_unix: Float
+    missions: [String]
+    rtls_attempt: Boolean
+    rtls_landings: Int
+    asds_attempt: Boolean
+    asds_landings: Int
+    water_landing: Boolean
+    details: String
+  }
+
+  type PartCapsule {
+    capsule_serial: String
+    capsule_id: String
+    status: String
+    original_launch: String
+    original_launch_unix: Float
+    missions: [String]
+    landings: Int
+    type: String
+    details: String
   }
 
   type Launchpad {
