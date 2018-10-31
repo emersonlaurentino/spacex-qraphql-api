@@ -5,7 +5,7 @@
 
 ## Docs
 
-> Can you read full documentation on the [SpaceX API Docs](https://github.com/r-spacex/SpaceX-API/tree/master/docs).
+> You can read the full documentation in the [SpaceX API Docs](https://github.com/r-spacex/SpaceX-API/tree/master/docs).
 
 |Query|description|params|
 |---|---|---|
